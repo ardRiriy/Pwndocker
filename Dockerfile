@@ -69,7 +69,7 @@ RUN pip install --upgrade setuptools && \
 
 
 
-# Oh-my-zsh
+# install fish
 RUN chsh -s /usr/bin/fish
 RUN fish
 
