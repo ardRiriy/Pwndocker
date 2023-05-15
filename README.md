@@ -1,7 +1,7 @@
 Pwndocker
 ===
 
-A docker environment for pwn in ctf based on **phusion/baseimage**, which is a modified ubuntu 16.04 baseimage for docker. I forked and magic changed by [pwndocker](https://github.com/skysider/pwndocker)
+A docker environment for pwn in ctf based on ubuntu baseimage for docker. I forked and magic changed by [pwndocker](https://github.com/skysider/pwndocker)
 
 ### Usage
 
