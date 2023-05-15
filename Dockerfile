@@ -2,7 +2,8 @@ FROM ubuntu:latest
 
 RUN dpkg --add-architecture i386 && \
     apt-get -y update && \
-    apt-get -y upgrade \
+    apt-get -y upgrade && \
+    apt-get install -y tzdata && \
     apt install -y \
     build-essential \
     libc6-dbg \
@@ -22,7 +23,6 @@ RUN dpkg --add-architecture i386 && \
     strace \
     ltrace \
     nasm \
-    socat\
     netcat\
     wget \
     gdb \
@@ -44,20 +44,8 @@ RUN dpkg --add-architecture i386 && \
     proxychains \
     openssh-server \
     lrzsz \
+    python3-pip
 
-RUN apt-add-repository ppa:brightbox/ruby-ng && \
-    apt update &&\
-    apt install -y ruby2.6 &&\
-    apt install -y ruby2.6-dev
-
-RUN ulimit -c 0
-RUN gem install one_gadget 
-RUN gem install seccomp-tools 
-
-RUN wget https://bootstrap.pypa.io/get-pip.py && \
-    python3 get-pip.py && \
-    python get-pip.py && \
-    rm get-pip.py
 
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --no-cache-dir \
@@ -82,10 +70,8 @@ RUN pip install --upgrade setuptools && \
 
 
 # Oh-my-zsh
-RUN chsh -s /bin/fish
+RUN chsh -s /usr/bin/fish
 RUN fish
-RUN curl -L http://get.oh-my.fish | fish
-RUN omf install sashimi
 
 RUN git clone https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
     cd /root/Pwngdb && cat /root/Pwngdb/.gdbinit  >> /root/.gdbinit && \
@@ -100,17 +86,11 @@ RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg &&  ./setup.sh
 
-# Vim-config
-RUN git clone https://github.com/Tacxingxing/vimrc && \
-    cd vimrc && chmod u+x install.sh && ./install.sh && cd ..
-
 WORKDIR /ctf/
 
 # COPY linux_server linux_server64  /ctf/
-COPY zshrc /root/.zshrc
-COPY tmux.conf /root/.tmux.conf
 COPY gdbinit /root/.gdbinit
 
 # RUN chmod a+x /ctf/linux_server /ctf/linux_server64
 
-ENTRYPOINT ["/bin/zsh"]
+ENTRYPOINT ["/usr/bin/fish"]
