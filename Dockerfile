@@ -1,8 +1,8 @@
-FROM phusion/baseimage:latest
+FROM ubuntu:latest
 
 RUN dpkg --add-architecture i386 && \
     apt-get -y update && \
-    apt-get -y upgrade
+    apt-get -y upgrade \
     apt install -y \
     build-essential \
     libc6-dbg \
@@ -10,13 +10,11 @@ RUN dpkg --add-architecture i386 && \
     g++-multilib \
     cmake \
     gcc \
-    ipython \
     vim \
     net-tools \
     curl \
     libffi-dev \
     libssl-dev \
-    python-dev \
     build-essential \
     tmux \
     glibc-source \
@@ -27,7 +25,6 @@ RUN dpkg --add-architecture i386 && \
     socat\
     netcat\
     wget \
-    radare2 \
     gdb \
     gdb-multiarch \
     netcat \
@@ -36,7 +33,7 @@ RUN dpkg --add-architecture i386 && \
     patchelf \
     gawk \
     file \
-    zsh \
+    fish \
     qemu \
     bison --fix-missing  \
     gcc-multilib \
@@ -85,8 +82,10 @@ RUN pip install --upgrade setuptools && \
 
 
 # Oh-my-zsh
-RUN chsh -s /bin/zsh
-RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN chsh -s /bin/fish
+RUN fish
+RUN curl -L http://get.oh-my.fish | fish
+RUN omf install sashimi
 
 RUN git clone https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
     cd /root/Pwngdb && cat /root/Pwngdb/.gdbinit  >> /root/.gdbinit && \
