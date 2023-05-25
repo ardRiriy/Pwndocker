@@ -9,7 +9,7 @@ A docker environment for pwn in ctf based on ubuntu baseimage for docker. I fork
 git clone https://github.com/TacXingXing/Pwndocker
 cd Pwndocker
 docker build -t pwndocker .
-docker run -it -v -v $(ctf_path):/ctf/work -p 23946:23946 --privileged --cap-add=SYS_PRTACE pwndocker
+docker run -it -v $(ctf_path):/ctf/work -p 23946:23946 --privileged --cap-add=SYS_PTRACE pwndocker
 ```
 
 ### included software
